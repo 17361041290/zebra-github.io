@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" integrity="sha256-no0c5ccDODBwp+9hSmV5VvPpKwHCpbVzXHexIkupM6U=" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js" integrity="sha256-a5YRB27CcBwBFcT5EF/f3E4vzIqyHrSR878nseNYw64=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;wuqisuda.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:true}}</script><script src="/js/config.js"></script>
+<meta name="description" content="描述：shallowReactive与shallowRef 、readonly与shallowReadonly、toRaw 与 markRaw、toRef、customRef、provide和inject（祖孙通信【重要】）、响应式数据的判断">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue3其他Composition api">
+<meta property="og:url" content="https://wuqisuda.github.io/2021/12/14/vue3_a_3/index.html">
+<meta property="og:site_name" content="YM&#39;s Blog">
+<meta property="og:description" content="描述：shallowReactive与shallowRef 、readonly与shallowReadonly、toRaw 与 markRaw、toRef、customRef、provide和inject（祖孙通信【重要】）、响应式数据的判断">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-14T09:12:46.065Z">
+<meta property="article:modified_time" content="2021-12-14T09:57:08.215Z">
+<meta property="article:author" content="越明">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://wuqisuda.github.io/2021/12/14/vue3_a_3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;wuqisuda.github.io&#x2F;2021&#x2F;12&#x2F;14&#x2F;vue3_a_3&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;12&#x2F;14&#x2F;vue3_a_3&#x2F;&quot;,&quot;title&quot;:&quot;vue3其他Composition api&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>vue3其他Composition api | YM's Blog</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?d376738f73204c8c485cf1a22df75029"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+  
+ 
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">YM's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-guestbook"><a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言板</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#shallowReactive-%E4%B8%8E-shallowRef"><span class="nav-number">1.</span> <span class="nav-text">shallowReactive 与 shallowRef</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#readonly-%E4%B8%8E-shallowReadonly"><span class="nav-number">2.</span> <span class="nav-text">readonly 与 shallowReadonly</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#toRaw-%E4%B8%8E-markRaw"><span class="nav-number">3.</span> <span class="nav-text">toRaw 与 markRaw</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#toRef"><span class="nav-number">4.</span> <span class="nav-text">toRef</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#customRef"><span class="nav-number">5.</span> <span class="nav-text">customRef</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#provide-%E4%B8%8E-inject%EF%BC%9A%E7%88%B6%E7%BB%84%E4%BB%B6%E4%B8%8E%E5%AD%99%E5%AD%90%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1"><span class="nav-number">6.</span> <span class="nav-text">provide 与 inject：父组件与孙子组件之间的通信</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E5%BC%8F%E6%95%B0%E6%8D%AE%E7%9A%84%E5%88%A4%E6%96%AD"><span class="nav-number">7.</span> <span class="nav-text">响应式数据的判断</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="越明"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">越明</p>
+  <div class="site-description" itemprop="description">不乱于心，不困于情，不畏将来，不念过往，如此，安好!</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wuqisuda" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wuqisuda" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2514860568@qq.com" title="E-Mail → mailto:2514860568@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/weixin_45901138?spm=1000.2115.3001.5343" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_45901138?spm&#x3D;1000.2115.3001.5343" rel="noopener" target="_blank">CSDN</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wuqisuda.github.io/2021/12/14/vue3_a_3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="越明">
+      <meta itemprop="description" content="不乱于心，不困于情，不畏将来，不念过往，如此，安好!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YM's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vue3其他Composition api
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-12-14 17:12:46 / 修改时间：17:57:08" itemprop="dateCreated datePublished" datetime="2021-12-14T17:12:46+08:00">2021-12-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Vue3%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">Vue3基础</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>11k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>10 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">描述：shallowReactive与shallowRef 、readonly与shallowReadonly、toRaw 与 markRaw、toRef、customRef、provide和inject（祖孙通信【重要】）、响应式数据的判断</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="shallowReactive-与-shallowRef"><a href="#shallowReactive-与-shallowRef" class="headerlink" title="shallowReactive 与 shallowRef"></a><strong>shallowReactive 与 shallowRef</strong></h1><ul>
+<li>shallowReactive : 只处理了对象内最外层属性的响应式(也就是浅响应式)</li>
+<li>shallowRef: 只处理了 value 的响应式, 不进行对象的 reactive 处理<blockquote>
+<p><em>什么时候用浅响应式呢?</em></p>
+<ol>
+<li>一般情况下使用 ref 和 reactive 即可</li>
+<li>如果有一个对象数据, 结构比较深, 但变化时只是外层属性变化 ===&gt; shallowReactive</li>
+<li>如果有一个对象数据, 后面会产生新的对象来替换 ===&gt; shallowRef</li>
+</ol>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;h2&gt;shallowReactive 与 shallowRef&lt;/h2&gt;</span><br><span class="line">  &lt;h3&gt;m1:&#123;&#123; m1 &#125;&#125;&lt;/h3&gt;</span><br><span class="line">  &lt;h3&gt;m2:&#123;&#123; m2 &#125;&#125;&lt;/h3&gt;</span><br><span class="line">  &lt;h3&gt;m3:&#123;&#123; m3 &#125;&#125;&lt;/h3&gt;</span><br><span class="line">  &lt;h3&gt;m4:&#123;&#123; m4 &#125;&#125;&lt;/h3&gt;</span><br><span class="line">  &lt;hr /&gt;</span><br><span class="line">  &lt;button @click=&quot;handleUpdata&quot;&gt;更新数据&lt;/button&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123;</span><br><span class="line">  defineComponent,</span><br><span class="line">  reactive,</span><br><span class="line">  ref,</span><br><span class="line">  shallowReactive,</span><br><span class="line">  shallowRef,</span><br><span class="line">&#125; from &quot;vue&quot;;</span><br><span class="line">export default defineComponent(&#123;</span><br><span class="line">  name: &quot;&quot;,</span><br><span class="line">  setup() &#123;</span><br><span class="line">     // m1 reactive 深度劫持，深度响应式</span><br><span class="line">    const m1 = reactive(&#123; a: 1, b: &#123; c: 2 &#125; &#125;)</span><br><span class="line">    const m2 = shallowReactive(&#123; a: 1, b: &#123; c: 2 &#125; &#125;)</span><br><span class="line"></span><br><span class="line">    const m3 = ref(&#123; a: 1, b: &#123; c: 2 &#125; &#125;)</span><br><span class="line">    const m4 = shallowRef(&#123; x: 1, y: &#123; c: &#x27;2&#x27; &#125; &#125;)</span><br><span class="line"></span><br><span class="line">    const handleUpdata = () =&gt; &#123;</span><br><span class="line">      // m1.b.c += 1</span><br><span class="line">      // m2.b.c += 1</span><br><span class="line">      // m3.value.a += 1</span><br><span class="line">      // m3.value.b.c += 1</span><br><span class="line">      // m4.value.y.c += 1</span><br><span class="line">      console.log(m3);</span><br><span class="line">      console.log(m4);</span><br><span class="line">      </span><br><span class="line">      // 为什么reactive或ref在使用时，shallowRef和shallowReactive的数据会变成响应式？</span><br><span class="line">      // 数据处于同一环境，都被同一个Fragment包着，Fragment是一种VNode的类型，m1.b.c触发改变</span><br><span class="line">      // 对应的模板领域会进行更新，所以会发生改变</span><br><span class="line">    &#125;</span><br><span class="line">    return &#123;</span><br><span class="line">      m1,</span><br><span class="line">      m2,</span><br><span class="line">      m3,</span><br><span class="line">      m4,</span><br><span class="line">      handleUpdata,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="readonly-与-shallowReadonly"><a href="#readonly-与-shallowReadonly" class="headerlink" title="readonly 与 shallowReadonly"></a><strong>readonly 与 shallowReadonly</strong></h1><ul>
+<li>readonly 深度只读数据   shallowReadonly: 浅只读数据<blockquote>
+<p><strong>应用场景:</strong><br><strong>在某些特定情况下, 我们可能不希望对数据进行更新的操作, 那就可以包装生成一个只读代理对象来读取数据, 而不能修改或删除</strong></p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;h2&gt;readonly 与 shallowReadonly&lt;/h2&gt;</span><br><span class="line">  &lt;h3&gt;state:&#123;&#123; state2 &#125;&#125;&lt;/h3&gt;</span><br><span class="line">  &lt;hr /&gt;</span><br><span class="line">  &lt;button @click=&quot;handleUpdata&quot;&gt;更新数据&lt;/button&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123; defineComponent, reactive, readonly, ref, shallowReadonly &#125; from &quot;vue&quot;;</span><br><span class="line">export default defineComponent(&#123;</span><br><span class="line">  name: &quot;&quot;,</span><br><span class="line">  setup(props, &#123; attrs, emit, slots &#125;) &#123;</span><br><span class="line">    const state = reactive(&#123;</span><br><span class="line">      name:&#x27;he&#x27;,</span><br><span class="line">      age:20,</span><br><span class="line">      car:&#123;</span><br><span class="line">        name:&#x27;红旗&#x27;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    // 只读数据---深度只读 对象的属性不能修改，对象的对象的属性也不能修改</span><br><span class="line">    // const state2 = readonly(state)</span><br><span class="line">    // 只读数据---浅度只读 对象的属性不能修改，对象的对象的属性可以修改</span><br><span class="line">    const state2 = JSON.parse(JSON.stringify(shallowReadonly(state)))</span><br><span class="line"></span><br><span class="line">    //  问题：state对象里的属性改变，也会影响state2对象里的属性(浅拷贝)</span><br><span class="line">    //  解决：JSON.parse(JSON.stringify(shallowReadonly(state))) 进行深拷贝</span><br><span class="line">    const handleUpdata = ()=&gt;&#123;</span><br><span class="line">      // state2.name += &#x27;==&#x27;</span><br><span class="line">      state2.car.name += &#x27;--&#x27;</span><br><span class="line">      console.log(state.car,state2.car);</span><br><span class="line">    &#125;</span><br><span class="line">    return &#123;</span><br><span class="line">      state2,</span><br><span class="line">      state,</span><br><span class="line">      handleUpdata</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="toRaw-与-markRaw"><a href="#toRaw-与-markRaw" class="headerlink" title="toRaw 与 markRaw"></a><strong>toRaw 与 markRaw</strong></h1><ul>
+<li>toRaw:把代理对象变成普通对象，数据变化，界面不变化</li>
+<li>toRaw:返回由 reactive 或 readonly 方法转换成响应式代理的普通对象</li>
+<li>markRaw:markRaw标记的对象,不能成为代理对象，数据不能在页面更新</li>
+</ul>
+<p><strong>markRaw应用场景:</strong><br><strong>有些值不应被设置为响应式的，例如复杂的第三方类实例或 Vue 组件对象。</strong><br><strong>当渲染具有不可变数据源的大列表时，跳过代理转换可以提高性能。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;h2&gt;toRaw 与 markRaw&lt;/h2&gt;</span><br><span class="line">  &lt;h3&gt;state:&#123;&#123; state &#125;&#125;&lt;/h3&gt;</span><br><span class="line">  &lt;h3&gt;user1:&#123;&#123; user1 &#125;&#125;&lt;/h3&gt;</span><br><span class="line">  &lt;h3&gt;user2:&#123;&#123; user2 &#125;&#125;&lt;/h3&gt;</span><br><span class="line">  &lt;hr /&gt;</span><br><span class="line">  &lt;button @click=&quot;handleUpdata&quot;&gt;toRaw&lt;/button&gt;</span><br><span class="line">  &lt;button @click=&quot;handleUpdata1&quot;&gt;markRaw&lt;/button&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123; defineComponent, markRaw, reactive, toRaw &#125; from &quot;vue&quot;;</span><br><span class="line">interface userInfo &#123;</span><br><span class="line">  name: string;</span><br><span class="line">  age: number;</span><br><span class="line">  car: any;</span><br><span class="line">  likes?: string[];</span><br><span class="line">&#125;</span><br><span class="line">export default defineComponent(&#123;</span><br><span class="line">  name: &quot;&quot;,</span><br><span class="line">  setup() &#123;</span><br><span class="line">    const state = reactive&lt;userInfo&gt;(&#123;</span><br><span class="line">      name: &quot;he&quot;,</span><br><span class="line">      age: 20,</span><br><span class="line">      car: &#123;</span><br><span class="line">        name: &quot;红旗&quot;,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">    // const user1:any = reactive(&#123;&#125;)</span><br><span class="line">    // const user2:any = reactive(&#123;&#125;)</span><br><span class="line">    const handleUpdata = () =&gt; &#123;</span><br><span class="line">      // 把代理对象变成普通对象，数据变化，界面不变化</span><br><span class="line">      const user1 = toRaw(state);</span><br><span class="line">      user1.name += &quot;==&quot;;</span><br><span class="line">      console.log(state, user1);</span><br><span class="line">    &#125;;</span><br><span class="line">    const handleUpdata1 = () =&gt; &#123;</span><br><span class="line">      // markRaw标记的对象,不能成为代理对象，数据不能在页面更新</span><br><span class="line">      const likes = [&quot;1&quot;];</span><br><span class="line">      state.likes = markRaw(likes);</span><br><span class="line">      setInterval(() =&gt; &#123;</span><br><span class="line">        if (state.likes) &#123;</span><br><span class="line">          state.likes[0] += &quot;0&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;, 1000);</span><br><span class="line">      console.log(state);</span><br><span class="line"></span><br><span class="line">      // const user1 = JSON.parse(JSON.stringify(markRaw(state)));</span><br><span class="line">      // user1.name += &#x27;123&#x27;</span><br><span class="line">      // console.log(state);</span><br><span class="line">      // console.log(user1);</span><br><span class="line">      </span><br><span class="line">    &#125;;</span><br><span class="line">    return &#123;</span><br><span class="line">      state,</span><br><span class="line">      handleUpdata,</span><br><span class="line">      handleUpdata1,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="toRef"><a href="#toRef" class="headerlink" title="toRef"></a><strong>toRef</strong></h1><ul>
+<li>为源响应式对象上的某个属性创建一个 ref 对象, 二者内部操作的是同一个数据值, 更新时二者是同步的</li>
+<li><code>const age = toRef(state, &quot;age&quot;)</code></li>
+<li>区别ref : 拷贝了一份新的数据值单独操作, 更新时相互不影响</li>
+<li>应用: 当要将 某个 prop 的 ref 传递给复合函数时，toRef 很有用<blockquote>
+<p>App.vue</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;h2&gt;toRef&lt;/h2&gt;</span><br><span class="line">  &lt;h3&gt;state:&#123;&#123; state &#125;&#125;&lt;/h3&gt;</span><br><span class="line">  &lt;h3&gt;age:&#123;&#123; age &#125;&#125;&lt;/h3&gt;</span><br><span class="line">  &lt;h3&gt;name:&#123;&#123; name &#125;&#125;&lt;/h3&gt;</span><br><span class="line">  &lt;hr /&gt;</span><br><span class="line">  &lt;button @click=&quot;handleUpdata&quot;&gt;toRaw&lt;/button&gt;</span><br><span class="line">  &lt;Child :age=&#x27;age&#x27;&gt;&lt;/Child&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123; defineComponent, reactive, toRef, ref &#125; from &quot;vue&quot;;</span><br><span class="line">import Child from &#x27;./components/Child.vue&#x27;</span><br><span class="line">export default defineComponent(&#123;</span><br><span class="line">  name: &quot;&quot;,</span><br><span class="line">  components:&#123;</span><br><span class="line">    Child</span><br><span class="line">  &#125;,</span><br><span class="line">  setup() &#123;</span><br><span class="line">    const state = reactive(&#123;</span><br><span class="line">      name: &quot;he&quot;,</span><br><span class="line">      age: 20,</span><br><span class="line">      car: &#123;</span><br><span class="line">        name: &quot;红旗&quot;,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">    // 把响应式数据state的属性age变成ref对象</span><br><span class="line">    const age = toRef(state, &quot;age&quot;);</span><br><span class="line">    // 把响应式数据state的属性name,使用ref进行包装，变成ref对象</span><br><span class="line">    const name = ref(state.name);</span><br><span class="line">    console.log(age,name);</span><br><span class="line">    </span><br><span class="line">    const handleUpdata = () =&gt; &#123;</span><br><span class="line">      state.age += 2</span><br><span class="line">      // name.value += 3</span><br><span class="line">    &#125;;</span><br><span class="line">    return &#123;</span><br><span class="line">      state,</span><br><span class="line">      age,</span><br><span class="line">      name,</span><br><span class="line">      handleUpdata,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Child.vue</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;h2&gt;Child组件，子组件&lt;/h2&gt;</span><br><span class="line">  &lt;h3&gt;age:&#123;&#123; age &#125;&#125;&lt;/h3&gt;</span><br><span class="line">  &lt;h3&gt;length:&#123;&#123; length &#125;&#125;&lt;/h3&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123; computed, defineComponent, Ref, ref, toRef &#125; from &quot;vue&quot;;</span><br><span class="line">// 参数必须是一个Ref类型的数据</span><br><span class="line">function useGetLength(age:Ref) &#123;</span><br><span class="line">  return computed(() =&gt; &#123;</span><br><span class="line">    return age.value.toString().length;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line">export default defineComponent(&#123;</span><br><span class="line">  name: &quot;&quot;,</span><br><span class="line">  //   props: &#123;</span><br><span class="line">  //     age: &#123;</span><br><span class="line">  //       type: Number,</span><br><span class="line">  //       required: true,</span><br><span class="line">  //     &#125;,</span><br><span class="line">  //   &#125;,</span><br><span class="line">  props: [&quot;age&quot;],</span><br><span class="line">  setup(props, &#123; attrs, emit, slots &#125;) &#123;</span><br><span class="line">    //把一个对象里的属性，变成ref对象</span><br><span class="line">    const length = useGetLength(toRef(props, &quot;age&quot;));</span><br><span class="line">    console.log(length);</span><br><span class="line">    console.log(props);</span><br><span class="line">    return &#123;</span><br><span class="line">      length,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="customRef"><a href="#customRef" class="headerlink" title="customRef"></a><strong>customRef</strong></h1><ul>
+<li>创建一个自定义的 ref，并对其依赖项跟踪和更新触发进行显式控制</li>
+</ul>
+<p><strong>需求: 使用 customRef 实现 debounce 的示例</strong><br><strong>get: 告诉vue追踪数据:track() set: 告诉Vue更新页面:trigger()</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;h2&gt;customRef 的使用:自定义hook防抖的函数&lt;/h2&gt;</span><br><span class="line">  &lt;input type=&quot;text&quot; v-model=&quot;keyword&quot; /&gt;</span><br><span class="line">  &lt;p&gt;&#123;&#123; keyword &#125;&#125;&lt;/p&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123; customRef, defineComponent, ref &#125; from &quot;vue&quot;;</span><br><span class="line">// 自定义hook防抖的函数</span><br><span class="line">// value传入的数据，将来数据的类型不确定，所以用泛型</span><br><span class="line">// num是防抖的间隔时间</span><br><span class="line">function UsecustomRef&lt;T&gt;(value: T, num=200) &#123;</span><br><span class="line">  // 准备一个存储定时器的id的变量</span><br><span class="line">  let timeoutId: number;</span><br><span class="line">  return customRef((track, trigger) =&gt; &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      // 返回数据</span><br><span class="line">      get() &#123;</span><br><span class="line">        // 告诉vue追踪数据</span><br><span class="line">        track();</span><br><span class="line">        return value;</span><br><span class="line">      &#125;,</span><br><span class="line">      // 设置数据</span><br><span class="line">      set(newValue: T) &#123;</span><br><span class="line">        // 清理定时器</span><br><span class="line">        clearTimeout(timeoutId);</span><br><span class="line">        // 开启定时器</span><br><span class="line">        timeoutId = setTimeout(() =&gt; &#123;</span><br><span class="line">          value = newValue;</span><br><span class="line">          // 告诉Vue更新页面</span><br><span class="line">          trigger();</span><br><span class="line">        &#125;, num);</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line">export default defineComponent(&#123;</span><br><span class="line">  name: &quot;&quot;,</span><br><span class="line">  setup(props, &#123; attrs, emit, slots &#125;) &#123;</span><br><span class="line">    // const keyword = ref(&#x27;abc&#x27;)</span><br><span class="line">    const keyword = UsecustomRef(&quot;abc&quot;, 500);</span><br><span class="line">    return &#123;</span><br><span class="line">      keyword,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="provide-与-inject：父组件与孙子组件之间的通信"><a href="#provide-与-inject：父组件与孙子组件之间的通信" class="headerlink" title="provide 与 inject：父组件与孙子组件之间的通信"></a><strong>provide 与 inject：父组件与孙子组件之间的通信</strong></h1><p><strong>provide和inject提供依赖注入，功能类似 2.x 的provide/inject</strong><br><strong>实现跨层级组件(祖孙)间通信</strong></p>
+<blockquote>
+<p>App.vue(父组件)</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;h2&gt;provide 与 inject&lt;/h2&gt;</span><br><span class="line">  &lt;p&gt;color:&#123;&#123;color&#125;&#125;&lt;/p&gt;</span><br><span class="line">  &lt;button @click=&quot;color = &#x27;yellow&#x27;&quot;&gt;黄&lt;/button&gt;</span><br><span class="line">  &lt;button @click=&quot;color = &#x27;green&#x27;&quot;&gt;绿&lt;/button&gt;</span><br><span class="line">  &lt;button @click=&quot;color = &#x27;blue&#x27;&quot;&gt;蓝&lt;/button&gt;</span><br><span class="line">  &lt;hr&gt;</span><br><span class="line">  &lt;Son&gt;&lt;/Son&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;ts&quot;&gt;</span><br><span class="line">// 实现夸子级组件，与孙子组件通信</span><br><span class="line">import &#123; defineComponent, ref,provide &#125; from &quot;vue&quot;;</span><br><span class="line">import Son from &quot;./components/Child.vue&quot;;</span><br><span class="line"></span><br><span class="line">export default defineComponent(&#123;</span><br><span class="line">  name: &quot;&quot;,</span><br><span class="line">  components:&#123;</span><br><span class="line">    Son</span><br><span class="line">  &#125;,</span><br><span class="line">  setup(props, &#123; attrs, emit, slots &#125;) &#123;</span><br><span class="line">    // 响应式数据</span><br><span class="line">    const color = ref(&#x27;red&#x27;)</span><br><span class="line">    // provide</span><br><span class="line">    provide(&#x27;color&#x27;,color)</span><br><span class="line">    return &#123;</span><br><span class="line">      color</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Child.vue(子组件)</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;h2&gt;子级组件&lt;/h2&gt;</span><br><span class="line">  &lt;hr /&gt;</span><br><span class="line">  &lt;Grandson&gt;&lt;/Grandson&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123; defineComponent, ref &#125; from &quot;vue&quot;;</span><br><span class="line">import Grandson from &quot;./Grandson.vue&quot;;</span><br><span class="line">export default defineComponent(&#123;</span><br><span class="line">  name: &quot;Child&quot;,</span><br><span class="line">  components: &#123;</span><br><span class="line">    Grandson,</span><br><span class="line">  &#125;,</span><br><span class="line">  setup(props, &#123; attrs, emit, slots &#125;) &#123;</span><br><span class="line">    return &#123;&#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Grandson.vue(孙组件)</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;h2 :style=&quot;&#123;color&#125;&quot;&gt;孙子组件&lt;/h2&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123; defineComponent, inject &#125; from &quot;vue&quot;;</span><br><span class="line">export default defineComponent(&#123;</span><br><span class="line">  name: &quot;Grandson&quot;,</span><br><span class="line">  setup(props, &#123; attrs, emit, slots &#125;) &#123;</span><br><span class="line">    const color = inject(&#x27;color&#x27;)</span><br><span class="line">    return &#123;</span><br><span class="line">      color</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="响应式数据的判断"><a href="#响应式数据的判断" class="headerlink" title="响应式数据的判断"></a><strong>响应式数据的判断</strong></h1><p><strong>isRef: 检查一个值是否为一个 ref 对象</strong><br><strong>isReactive: 检查一个对象是否是由 reactive 创建的响应式代理</strong><br><strong>isReadonly: 检查一个对象是否是由 readonly 创建的只读代理</strong><br><strong>isProxy: 检查一个对象是否是由 reactive 或者 readonly 方法创建的代理</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;h2&gt;响应式数据的判断&lt;/h2&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123;</span><br><span class="line">  defineComponent,</span><br><span class="line">  ref,</span><br><span class="line">  isRef,</span><br><span class="line">  isReactive,</span><br><span class="line">  reactive,</span><br><span class="line">  isReadonly,</span><br><span class="line">  readonly,</span><br><span class="line">  isProxy,</span><br><span class="line">&#125; from &quot;vue&quot;;</span><br><span class="line">export default defineComponent(&#123;</span><br><span class="line">  name: &quot;&quot;,</span><br><span class="line">  // isRef isReactive isReadonly isProxy</span><br><span class="line">  setup(props, &#123; attrs, emit, slots &#125;) &#123;</span><br><span class="line">    // isRef: 检查一个值是否为一个 ref 对象,返回true or false</span><br><span class="line">    console.log(isRef(ref(0))); // true</span><br><span class="line">    // isReactive: 检查一个对象是否是由 reactive 创建的响应式代理,返回true or false</span><br><span class="line">    console.log(isReactive(reactive(&#123;&#125;))); // true</span><br><span class="line">    // isReadonly: 检查一个对象是否是由 readonly 创建的只读代理,返回true or false</span><br><span class="line">    const str = ref(&#x27;abc&#x27;) </span><br><span class="line">    const str1 = readonly(str)</span><br><span class="line">    console.log(&#x27;str:&#x27;,isReadonly(str1)); // true</span><br><span class="line">    // isProxy: 检查一个对象是否是由 reactive 或者 readonly 方法创建的代理</span><br><span class="line">    console.log(&quot;isProxy1:&quot;,isProxy(readonly(&#123;&#125;)));</span><br><span class="line">    console.log(&quot;isProxy2:&quot;,isProxy(reactive(&#123;&#125;)));</span><br><span class="line">    return &#123;&#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>you can reward me here. Thank you!</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechartpay.png" alt="越明 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="越明 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>越明
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://wuqisuda.github.io/2021/12/14/vue3_a_3/" title="vue3其他Composition api">https://wuqisuda.github.io/2021/12/14/vue3_a_3/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechart.png">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"><i class="fa fa-tag"></i>Vue</a>
+          </div>
+
+        
+
+
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/12/14/vue3_a_2/" rel="prev" title="Vue3常用Composition Api">
+                  <i class="fa fa-chevron-left"></i> Vue3常用Composition Api
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/12/14/vue3_a_4/" rel="next" title="vue3 手写组合 API">
+                  vue3 手写组合 API <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">越明</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">82k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:14</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  <script class="next-config" data-name="nprogress" type="application/json">{&quot;enable&quot;:true,&quot;spinner&quot;:true}</script>
+  <script src="/js/third-party/nprogress.js"></script>
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
