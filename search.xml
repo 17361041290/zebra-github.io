@@ -212,6 +212,34 @@
       </tags>
   </entry>
   <entry>
+    <title>React知识点————React应用与ajax【第三章、第四章】</title>
+    <url>/2021/12/30/03.React/</url>
+    <content><![CDATA[<h1 id="github用户搜索-案例"><a href="#github用户搜索-案例" class="headerlink" title="github用户搜索 案例"></a>github用户搜索 案例</h1><p><strong>解决跨域</strong></p>
+<ul>
+<li> package.json 里添加 proxy, “proxy”: “<a href="http://localhost:5000&quot;">http://localhost:5000&quot;</a></li>
+</ul>
+<p><strong>连续解构赋值</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 正常写法</span><br><span class="line">let obj = &#123;a:&#123;b:&#123;c:1&#125;&#125;&#125;</span><br><span class="line">let obj2 = &#123;a:&#123;b:88&#125;&#125;</span><br><span class="line">console.log(obj.a.b.c);</span><br><span class="line">// 连续解构赋值 </span><br><span class="line">const &#123;a:&#123;b:&#123;c&#125;&#125;&#125; = obj</span><br><span class="line">console.log(c);</span><br><span class="line">// 连续解构赋值 + 重命名</span><br><span class="line">const &#123;a:&#123;b:data&#125;&#125; = obj2</span><br><span class="line">console.log(data);</span><br></pre></td></tr></table></figure>
+
+<h1 id="消息订阅——发布机制-pubsub-js"><a href="#消息订阅——发布机制-pubsub-js" class="headerlink" title="消息订阅——发布机制 pubsub-js"></a>消息订阅——发布机制 pubsub-js</h1><p><strong>pubsub-js作用:用于任意页面之间的通信(订阅发布:先发布后订阅)</strong><br>用法：<br>1.发布  PubSub.publish(‘switchMusic’, type);<br>2.订阅 PubSub.subscribe(‘switchMusic’, (msg, data) =&gt; {<br>            console.log(data)<br>       })<br>PubSub.subscribe会触发多次（每订阅一次，数据就会累加，需求只需订阅一次时使用）<br>3.取消订阅 <code>PubSub.unsubscribe(&#39;switchMusic&#39;)</code> React【componentWillUnmount】</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">componentDidMount() &#123;</span><br><span class="line">	this.token = PubSub.subscribe(&#x27;data&#x27;, (msg, data) =&gt; &#123;</span><br><span class="line">		this.setState(&#123;</span><br><span class="line">			...data</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line">componentWillUnmount()&#123;</span><br><span class="line">	console.log(&#x27;卸载&#x27;,this.token);</span><br><span class="line">	PubSub.unsubscribe(this.token)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="React-ajax【第四章】"><a href="#React-ajax【第四章】" class="headerlink" title="React ajax【第四章】"></a>React ajax【第四章】</h1><ul>
+<li>xhr 和 fetch</li>
+<li>xhr 封装的库：axios实现异步加载</li>
+<li>fetch：fetch实现异步加载<h1 id="fetch发送请求-（关注分离的设计思想）"><a href="#fetch发送请求-（关注分离的设计思想）" class="headerlink" title="fetch发送请求 （关注分离的设计思想）"></a>fetch发送请求 （关注分离的设计思想）</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// try catch 获取await的错误情况</span><br><span class="line">try &#123;</span><br><span class="line">	let data = await fetch(`https://api.github.com/search/users?q=$&#123;keyWord&#125;`)</span><br><span class="line">	let response = await data.json()</span><br><span class="line">	PubSub.publish(&#x27;data&#x27;, &#123; isLoading: false, users: response.items &#125;);</span><br><span class="line">	console.log(response);</span><br><span class="line">&#125; catch (error) &#123;</span><br><span class="line">	console.log(error);</span><br><span class="line">	PubSub.publish(&#x27;data&#x27;, &#123;isLoading:false,err:error.message&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// axios实现异步加载</span><br><span class="line">axios.get(`https://api.github.com/search/users?q=$&#123;keyWord&#125;`).then(</span><br><span class="line">	response =&gt; &#123;</span><br><span class="line">		PubSub.publish(&#x27;data&#x27;, &#123;isLoading:false,users:response.data.items&#125;);</span><br><span class="line">	&#125;,</span><br><span class="line">	error =&gt; &#123;</span><br><span class="line">		PubSub.publish(&#x27;data&#x27;, &#123;isLoading:false,err:error.message&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>React</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>React知识点————面向组件编程【第二章】</title>
     <url>/2021/12/30/02.React/</url>
     <content><![CDATA[<h1 id="基本理解和使用"><a href="#基本理解和使用" class="headerlink" title="基本理解和使用"></a>基本理解和使用</h1><ul>
@@ -372,34 +400,6 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Time extends React.Component &#123;</span><br><span class="line">         state = &#123;date : new Date()&#125;</span><br><span class="line">         componentDidMount()&#123;</span><br><span class="line">             setInterval(() =&gt; &#123;</span><br><span class="line">                 this.setState(&#123;</span><br><span class="line">                     date: new Date()</span><br><span class="line">                 &#125;)</span><br><span class="line">             &#125;, 1000);</span><br><span class="line">         &#125;</span><br><span class="line">         render() &#123;</span><br><span class="line">             // span标签不断变化，外层标签不会受影响，内层input标签也没有影响</span><br><span class="line">             return (</span><br><span class="line">                 &lt;div&gt;</span><br><span class="line">                     &lt;h1&gt;Hellow&lt;/h1&gt;</span><br><span class="line">                     &lt;input type=&quot;text&quot; /&gt;</span><br><span class="line">                     &lt;span&gt;</span><br><span class="line">                         现在是：&#123;this.state.date.toTimeString()&#125;</span><br><span class="line">                         &lt;input type=&quot;text&quot; /&gt;</span><br><span class="line">                     &lt;/span&gt;</span><br><span class="line">                 &lt;/div&gt;</span><br><span class="line">             )</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     ReactDOM.render(&lt;Time /&gt;, document.getElementById(&#x27;app&#x27;))</span><br></pre></td></tr></table></figure>
 <p><strong>key的作用</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</span><br><span class="line"> &lt;script src=&quot;./js/react.development.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"> &lt;!-- 用于支持React操作DOM --&gt;</span><br><span class="line"> &lt;script src=&quot;./js/react-dom.development.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"> &lt;!-- 用于jsx转js --&gt;</span><br><span class="line"> &lt;script src=&quot;./js/babel.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"> &lt;!-- 用于对属性标签数据限制 --&gt;</span><br><span class="line"> &lt;script src=&quot;./js/prop-types.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"> &lt;script type=&quot;text/babel&quot;&gt;</span><br><span class="line">     //#region </span><br><span class="line">     // Diffinf算法，逐层对比，最小力度是标签</span><br><span class="line">     // 经典面试题：</span><br><span class="line">     // 1. react/vue 中的key有什么作用？（key的内部原理？）</span><br><span class="line">     // 2. 为什么遍历数组时，key最好不用index?</span><br><span class="line">     //#endregion</span><br><span class="line">     class Person extends React.Component &#123;</span><br><span class="line">         state = &#123;</span><br><span class="line">             persons: [</span><br><span class="line">                 &#123; id: 1, name: &#x27;李四&#x27;, age: 18 &#125;,</span><br><span class="line">                 &#123; id: 2, name: &#x27;张三&#x27;, age: 20 &#125;</span><br><span class="line">             ]</span><br><span class="line">         &#125;</span><br><span class="line">         addData = () =&gt; &#123;</span><br><span class="line">             // this.state.persons.push(&#123;</span><br><span class="line">             //     id: 3, name: &#x27;王五&#x27;, age: 19</span><br><span class="line">             // &#125;)</span><br><span class="line">             this.setState(&#123;persons:[&#123;id: 3, name: &#x27;王五&#x27;, age: 19&#125;,...this.state.persons]&#125;)</span><br><span class="line">         &#125;</span><br><span class="line">         render() &#123;</span><br><span class="line">             return (</span><br><span class="line">                 &lt;div&gt;</span><br><span class="line">                     &lt;h1&gt;展示人员信息&lt;/h1&gt;</span><br><span class="line">                     &lt;button onClick=&#123;this.addData&#125;&gt;添加数据&lt;/button&gt;</span><br><span class="line">                     &lt;ul&gt;</span><br><span class="line">                     &#123;</span><br><span class="line">                         this.state.persons.map((item,index) =&gt; &#123;</span><br><span class="line">                             return &lt;li key=&#123;index&#125;&gt;姓名：&#123;item.name&#125;,年龄：&#123;item.age&#125;&lt;input type=&quot;text&quot; /&gt;&lt;/li&gt;</span><br><span class="line">                         &#125;)</span><br><span class="line">                     &#125;</span><br><span class="line">                     &lt;/ul&gt;</span><br><span class="line">                     &lt;hr/&gt;</span><br><span class="line">                     &lt;ul&gt;</span><br><span class="line">                     &#123;</span><br><span class="line">                         this.state.persons.map((item,index) =&gt; &#123;</span><br><span class="line">                             return &lt;li key=&#123;item.id&#125;&gt;姓名：&#123;item.name&#125;,年龄：&#123;item.age&#125;&lt;input type=&quot;text&quot; /&gt;&lt;/li&gt;</span><br><span class="line">                         &#125;)</span><br><span class="line">                     &#125;</span><br><span class="line">                     &lt;/ul&gt;</span><br><span class="line">                 &lt;/div&gt;</span><br><span class="line">             )</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line">     ReactDOM.render(&lt;Person /&gt;, document.getElementById(&#x27;app&#x27;))</span><br><span class="line"> &lt;/script&gt;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>React</category>
-      </categories>
-      <tags>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>React知识点————React应用与ajax【第三章、第四章】</title>
-    <url>/2021/12/30/03.React/</url>
-    <content><![CDATA[<h1 id="github用户搜索-案例"><a href="#github用户搜索-案例" class="headerlink" title="github用户搜索 案例"></a>github用户搜索 案例</h1><p><strong>解决跨域</strong></p>
-<ul>
-<li> package.json 里添加 proxy, “proxy”: “<a href="http://localhost:5000&quot;">http://localhost:5000&quot;</a></li>
-</ul>
-<p><strong>连续解构赋值</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 正常写法</span><br><span class="line">let obj = &#123;a:&#123;b:&#123;c:1&#125;&#125;&#125;</span><br><span class="line">let obj2 = &#123;a:&#123;b:88&#125;&#125;</span><br><span class="line">console.log(obj.a.b.c);</span><br><span class="line">// 连续解构赋值 </span><br><span class="line">const &#123;a:&#123;b:&#123;c&#125;&#125;&#125; = obj</span><br><span class="line">console.log(c);</span><br><span class="line">// 连续解构赋值 + 重命名</span><br><span class="line">const &#123;a:&#123;b:data&#125;&#125; = obj2</span><br><span class="line">console.log(data);</span><br></pre></td></tr></table></figure>
-
-<h1 id="消息订阅——发布机制-pubsub-js"><a href="#消息订阅——发布机制-pubsub-js" class="headerlink" title="消息订阅——发布机制 pubsub-js"></a>消息订阅——发布机制 pubsub-js</h1><p><strong>pubsub-js作用:用于任意页面之间的通信(订阅发布:先发布后订阅)</strong><br>用法：<br>1.发布  PubSub.publish(‘switchMusic’, type);<br>2.订阅 PubSub.subscribe(‘switchMusic’, (msg, data) =&gt; {<br>            console.log(data)<br>       })<br>PubSub.subscribe会触发多次（每订阅一次，数据就会累加，需求只需订阅一次时使用）<br>3.取消订阅 <code>PubSub.unsubscribe(&#39;switchMusic&#39;)</code> React【componentWillUnmount】</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">componentDidMount() &#123;</span><br><span class="line">	this.token = PubSub.subscribe(&#x27;data&#x27;, (msg, data) =&gt; &#123;</span><br><span class="line">		this.setState(&#123;</span><br><span class="line">			...data</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line">componentWillUnmount()&#123;</span><br><span class="line">	console.log(&#x27;卸载&#x27;,this.token);</span><br><span class="line">	PubSub.unsubscribe(this.token)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h1 id="React-ajax【第四章】"><a href="#React-ajax【第四章】" class="headerlink" title="React ajax【第四章】"></a>React ajax【第四章】</h1><ul>
-<li>xhr 和 fetch</li>
-<li>xhr 封装的库：axios实现异步加载</li>
-<li>fetch：fetch实现异步加载<h1 id="fetch发送请求-（关注分离的设计思想）"><a href="#fetch发送请求-（关注分离的设计思想）" class="headerlink" title="fetch发送请求 （关注分离的设计思想）"></a>fetch发送请求 （关注分离的设计思想）</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// try catch 获取await的错误情况</span><br><span class="line">try &#123;</span><br><span class="line">	let data = await fetch(`https://api.github.com/search/users?q=$&#123;keyWord&#125;`)</span><br><span class="line">	let response = await data.json()</span><br><span class="line">	PubSub.publish(&#x27;data&#x27;, &#123; isLoading: false, users: response.items &#125;);</span><br><span class="line">	console.log(response);</span><br><span class="line">&#125; catch (error) &#123;</span><br><span class="line">	console.log(error);</span><br><span class="line">	PubSub.publish(&#x27;data&#x27;, &#123;isLoading:false,err:error.message&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// axios实现异步加载</span><br><span class="line">axios.get(`https://api.github.com/search/users?q=$&#123;keyWord&#125;`).then(</span><br><span class="line">	response =&gt; &#123;</span><br><span class="line">		PubSub.publish(&#x27;data&#x27;, &#123;isLoading:false,users:response.data.items&#125;);</span><br><span class="line">	&#125;,</span><br><span class="line">	error =&gt; &#123;</span><br><span class="line">		PubSub.publish(&#x27;data&#x27;, &#123;isLoading:false,err:error.message&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
-</ul>
 ]]></content>
       <categories>
         <category>React</category>
@@ -604,20 +604,6 @@
       </tags>
   </entry>
   <entry>
-    <title>客户端、服务器和数据库的关系</title>
-    <url>/2021/08/26/node/</url>
-    <content><![CDATA[<p>客户端向服务器发起请求，服务器去数据库调数据，数据库返回数据，服务器响应再把数据返回给客户端<br>i/o问题:会影响拿取数据的速度，磁盘（固态硬盘）的读写速度有限制</p>
-<p>i/o input:往磁盘输入数据 output:从磁盘输出数据<br>服务器通过磁盘输入或者输出数据库</p>
-<p>进程：程序（相当于是一个一个的车间）<br>线程：（相当于车间里的工人）如果磁盘读写（i/o）速度过慢，该线程就会一直等待，存在内存浪费<br>解决办法：让线程不再等待，继续工作,所以只需要一个线程<br>多线程：<br>单线程：node.js<br>node.js存在的问题：处理不了多用户访问请求（解决：分布式服务器，即增加服务器的数量）<br>node.js优点：访问速度快<br>node.js出现的目的：用node.js编写一个高性能的服务器<br><img src="/images/node.png" alt="image"></p>
-]]></content>
-      <categories>
-        <category>Node.js</category>
-      </categories>
-      <tags>
-        <tag>Node.js</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>js知识点-异步编程</title>
     <url>/2021/11/21/javascript_a_3/</url>
     <content><![CDATA[<blockquote>
@@ -653,6 +639,20 @@
       </categories>
       <tags>
         <tag>Js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>客户端、服务器和数据库的关系</title>
+    <url>/2021/08/26/node/</url>
+    <content><![CDATA[<p>客户端向服务器发起请求，服务器去数据库调数据，数据库返回数据，服务器响应再把数据返回给客户端<br>i/o问题:会影响拿取数据的速度，磁盘（固态硬盘）的读写速度有限制</p>
+<p>i/o input:往磁盘输入数据 output:从磁盘输出数据<br>服务器通过磁盘输入或者输出数据库</p>
+<p>进程：程序（相当于是一个一个的车间）<br>线程：（相当于车间里的工人）如果磁盘读写（i/o）速度过慢，该线程就会一直等待，存在内存浪费<br>解决办法：让线程不再等待，继续工作,所以只需要一个线程<br>多线程：<br>单线程：node.js<br>node.js存在的问题：处理不了多用户访问请求（解决：分布式服务器，即增加服务器的数量）<br>node.js优点：访问速度快<br>node.js出现的目的：用node.js编写一个高性能的服务器<br><img src="/images/node.png" alt="image"></p>
+]]></content>
+      <categories>
+        <category>Node.js</category>
+      </categories>
+      <tags>
+        <tag>Node.js</tag>
       </tags>
   </entry>
   <entry>
