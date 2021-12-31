@@ -22,28 +22,28 @@
   <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js" integrity="sha256-a5YRB27CcBwBFcT5EF/f3E4vzIqyHrSR878nseNYw64=" crossorigin="anonymous"></script>
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;wuqisuda.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:true}}</script><script src="/js/config.js"></script>
-<meta name="description" content="描述：安装、接口、布尔值类型 字符串类型 数字类型 数组类型 元组类型、枚举、any类型、void、object、联合类型">
+<meta name="description" content="github用户搜索案例知识点：解决跨域、连续解构赋值、消息订阅——发布机制 pubsub-js、fetch发送请求">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ts知识点-基础类型">
-<meta property="og:url" content="https://wuqisuda.github.io/2021/11/30/Typescript_01/index.html">
+<meta property="og:title" content="React知识点————React应用与ajax【第三章、第四章】">
+<meta property="og:url" content="https://wuqisuda.github.io/2021/12/30/03.React/index.html">
 <meta property="og:site_name" content="YM&#39;s Blog">
-<meta property="og:description" content="描述：安装、接口、布尔值类型 字符串类型 数字类型 数组类型 元组类型、枚举、any类型、void、object、联合类型">
+<meta property="og:description" content="github用户搜索案例知识点：解决跨域、连续解构赋值、消息订阅——发布机制 pubsub-js、fetch发送请求">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-11-30T02:58:08.676Z">
-<meta property="article:modified_time" content="2021-11-30T03:13:31.313Z">
+<meta property="article:published_time" content="2021-12-30T14:35:10.263Z">
+<meta property="article:modified_time" content="2021-12-30T15:14:04.474Z">
 <meta property="article:author" content="越明">
-<meta property="article:tag" content="Typescript">
+<meta property="article:tag" content="React">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://wuqisuda.github.io/2021/11/30/Typescript_01/">
+<link rel="canonical" href="https://wuqisuda.github.io/2021/12/30/03.React/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;wuqisuda.github.io&#x2F;2021&#x2F;11&#x2F;30&#x2F;Typescript_01&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;11&#x2F;30&#x2F;Typescript_01&#x2F;&quot;,&quot;title&quot;:&quot;Ts知识点-基础类型&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;wuqisuda.github.io&#x2F;2021&#x2F;12&#x2F;30&#x2F;03.React&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;12&#x2F;30&#x2F;03.React&#x2F;&quot;,&quot;title&quot;:&quot;React知识点————React应用与ajax【第三章、第四章】&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>Ts知识点-基础类型 | YM's Blog</title>
+<title>React知识点————React应用与ajax【第三章、第四章】 | YM's Blog</title>
   
 
   <script src="/js/third-party/analytics/baidu-analytics.js"></script>
@@ -152,7 +152,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -165,6 +165,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#github%E7%94%A8%E6%88%B7%E6%90%9C%E7%B4%A2-%E6%A1%88%E4%BE%8B"><span class="nav-number">1.</span> <span class="nav-text">github用户搜索 案例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E2%80%94%E2%80%94%E5%8F%91%E5%B8%83%E6%9C%BA%E5%88%B6-pubsub-js"><span class="nav-number">2.</span> <span class="nav-text">消息订阅——发布机制 pubsub-js</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React-ajax%E3%80%90%E7%AC%AC%E5%9B%9B%E7%AB%A0%E3%80%91"><span class="nav-number">3.</span> <span class="nav-text">React ajax【第四章】</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fetch%E5%8F%91%E9%80%81%E8%AF%B7%E6%B1%82-%EF%BC%88%E5%85%B3%E6%B3%A8%E5%88%86%E7%A6%BB%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">fetch发送请求 （关注分离的设计思想）</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -257,7 +258,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://wuqisuda.github.io/2021/11/30/Typescript_01/">
+    <link itemprop="mainEntityOfPage" href="https://wuqisuda.github.io/2021/12/30/03.React/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -270,7 +271,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Ts知识点-基础类型
+          React知识点————React应用与ajax【第三章、第四章】
         </h1>
 
         <div class="post-meta-container">
@@ -282,7 +283,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2021-11-30 10:58:08 / 修改时间：11:13:31" itemprop="dateCreated datePublished" datetime="2021-11-30T10:58:08+08:00">2021-11-30</time>
+      <time title="创建时间：2021-12-30 22:35:10 / 修改时间：23:14:04" itemprop="dateCreated datePublished" datetime="2021-12-30T22:35:10+08:00">2021-12-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -290,7 +291,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Typescript/" itemprop="url" rel="index"><span itemprop="name">Typescript</span></a>
+          <a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
         </span>
     </span>
 
@@ -300,7 +301,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.6k</span>
+      <span>1.7k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -311,7 +312,7 @@
     </span>
 </div>
 
-            <div class="post-description">描述：安装、接口、布尔值类型 字符串类型 数字类型 数组类型 元组类型、枚举、any类型、void、object、联合类型</div>
+            <div class="post-description">github用户搜索案例知识点：解决跨域、连续解构赋值、消息订阅——发布机制 pubsub-js、fetch发送请求</div>
         </div>
       </header>
 
@@ -319,31 +320,23 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p><strong>TypeScript 是 JavaScript 的一个超集，主要提供了类型系统和对 ES6+ 的支持</strong></p>
-<blockquote>
-<p>安装:<code>npm install -g typescript</code><br>检查是否成功：<code>tsc -V</code></p>
-</blockquote>
-<blockquote>
-<ol>
-<li>js文件中使用ts代码,需要编译成js代码才能引入 tsc .\text01.ts</li>
-<li>ts文件中使用js代码,可以直接引入</li>
-<li>ts文件中函数形参使用某个类型进行修饰，编译后的js文件不会显示【ts:name:string js:name】</li>
-<li>ts文件中使用let,编译后为var</li>
-<li>ts文件自动编译: </li>
-</ol>
-<p><strong>5.1 生成配置文件tsconfig.json</strong><br>    <code>tsc --init</code><br><strong>5.2 修改tsconfig.json配置</strong></p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;outDir&quot;: &quot;./js&quot;, // 把ts文件最终编译后放在js目录中</span><br><span class="line">&quot;strict&quot;: false, //不使用严格模式</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>5.3 启动监视任务</strong><br>    终端 -&gt; 运行任务 -&gt; 监视tsconfig.json<br>6. 类型注解：一种轻量级的为函数或变量添加约束的方式【name:string】<br>7. 接口：<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// 接口：一种能力，一种约束而已</span><br><span class="line">(()=&gt;&#123;</span><br><span class="line">    // 定义一个接口</span><br><span class="line">    interface Iperson &#123;</span><br><span class="line">        firstname:string // 姓</span><br><span class="line">        lastname: string // 名</span><br><span class="line">    &#125;</span><br><span class="line">    // 输出姓名</span><br><span class="line">    function showName(person: Iperson) &#123;</span><br><span class="line">        return  person.firstname + person.lastname</span><br><span class="line">    &#125;</span><br><span class="line">    // 定义一个对象</span><br><span class="line">    const person = &#123;</span><br><span class="line">        firstname:&#x27;西门&#x27;,</span><br><span class="line">        lastname: &#x27;吹雪&#x27;</span><br><span class="line">    &#125;</span><br><span class="line">    console.log(showName(person));</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure><br>8. 布尔值类型 字符串类型 数字类型 数组类型 元组类型<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">let isDone: boolean = false</span><br><span class="line">let a1: number = 10 // 十进制</span><br><span class="line">let name: string = &#x27;tom&#x27;</span><br><span class="line">// null 和 undefined 是所有类型的子类型 可以把 null 和 undefined 赋值给 number 类型的变量【注意去除严格模式 tsconfig.json &quot;strict&quot;: false, //不使用严格模式】</span><br><span class="line">let u: undefined = undefined</span><br><span class="line">let n: null = null</span><br><span class="line">// 数组类型 里面的数据类型必须和定义数组时候的类型一致</span><br><span class="line">let list1: number[] = [1, 2, 3]</span><br><span class="line">// 数组泛型，Array&lt;元素类型&gt;</span><br><span class="line">let list2: Array&lt;number&gt; = [1, 2, 3]</span><br><span class="line">// 元组类型 类型和数据个数被限定</span><br><span class="line">let t1: [string, number] =  [&#x27;hello&#x27;, 10] // OK</span><br></pre></td></tr></table></figure><br>9. 枚举<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">enum Color &#123;</span><br><span class="line">  Red,</span><br><span class="line">  Green,</span><br><span class="line">  Blue</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 枚举数值默认从0开始依次递增</span><br><span class="line">// 根据特定的名称得到对应的枚举数值</span><br><span class="line">let myColor: Color = Color.Green // 1</span><br><span class="line">console.log(myColor, Color.Red, Color.Blue)</span><br></pre></td></tr></table></figure><br>10. any类型 适用任何类型【不清楚类型的变量指定一个类型】<br><code>let str:any = [&#39;asdnjas&#39;]</code><br><code>let list: any[] = [1, true, &#39;free&#39;]</code><br>11. void 表示没有任何类型, 一般用来说明函数的返回值不能是undefined和null之外的值<br>声明一个 void 类型的变量没有什么大用，因为你只能为它赋予 undefined 和 null<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function fn(): void &#123;</span><br><span class="line">   console.log(&#x27;fn()&#x27;)</span><br><span class="line">   // return undefined</span><br><span class="line">   // return null</span><br><span class="line">   // return 1 // error</span><br><span class="line"> &#125;</span><br><span class="line">console.log( fn());</span><br></pre></td></tr></table></figure><br>12. object类型</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function fn(obj:object): object &#123;</span><br><span class="line">    console.log(obj);</span><br><span class="line">    // 返回类型是object</span><br><span class="line">    return &#123;</span><br><span class="line">        name:&#x27;he&#x27;,</span><br><span class="line">        age:18</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  let obj = &#123;</span><br><span class="line">    height:1.88,</span><br><span class="line">    weight:90</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(fn(obj));</span><br><span class="line">//   console.log(fn(String));</span><br><span class="line">//   console.log(fn(new String(&#x27;123&#x27;)));</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ol start="13">
-<li>联合类型</li>
-</ol>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">function fn(obj:object | string): object &#123;</span><br><span class="line">    console.log(obj);</span><br><span class="line">    return &#123;</span><br><span class="line">        name:&#x27;he&#x27;,</span><br><span class="line">        age:18</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">let obj = &#x27;obj&#x27;</span><br><span class="line">console.log(fn(obj));</span><br><span class="line"></span><br><span class="line">// 类型断言:告诉编译器，我知道我自己是什么类型 写法：1.(&lt;string&gt;变量名) 2.  值 as 类型</span><br><span class="line">function fn(obj: number | string): number &#123;</span><br><span class="line">    //    return obj.toString().length</span><br><span class="line">    if ((&lt;string&gt;obj).length) &#123;</span><br><span class="line">        return (obj as string).length</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return obj.toString().length</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let obj = 123456</span><br><span class="line">console.log(fn(obj));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 类型推断</span><br><span class="line">/* 定义变量时赋值了, 推断为对应的类型 */</span><br><span class="line">let b9 = 123 // number</span><br><span class="line">// b9 = &#x27;abc&#x27; // error</span><br><span class="line"></span><br><span class="line">/* 定义变量时没有赋值, 推断为any类型 */</span><br><span class="line">let b10 // any类型</span><br><span class="line">b10 = 123</span><br><span class="line">b10 = &#x27;abc&#x27;</span><br></pre></td></tr></table></figure>
+        <h1 id="github用户搜索-案例"><a href="#github用户搜索-案例" class="headerlink" title="github用户搜索 案例"></a>github用户搜索 案例</h1><p><strong>解决跨域</strong></p>
+<ul>
+<li> package.json 里添加 proxy, “proxy”: “<a href="http://localhost:5000&quot;">http://localhost:5000&quot;</a></li>
+</ul>
+<p><strong>连续解构赋值</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 正常写法</span><br><span class="line">let obj = &#123;a:&#123;b:&#123;c:1&#125;&#125;&#125;</span><br><span class="line">let obj2 = &#123;a:&#123;b:88&#125;&#125;</span><br><span class="line">console.log(obj.a.b.c);</span><br><span class="line">// 连续解构赋值 </span><br><span class="line">const &#123;a:&#123;b:&#123;c&#125;&#125;&#125; = obj</span><br><span class="line">console.log(c);</span><br><span class="line">// 连续解构赋值 + 重命名</span><br><span class="line">const &#123;a:&#123;b:data&#125;&#125; = obj2</span><br><span class="line">console.log(data);</span><br></pre></td></tr></table></figure>
+
+<h1 id="消息订阅——发布机制-pubsub-js"><a href="#消息订阅——发布机制-pubsub-js" class="headerlink" title="消息订阅——发布机制 pubsub-js"></a>消息订阅——发布机制 pubsub-js</h1><p><strong>pubsub-js作用:用于任意页面之间的通信(订阅发布:先发布后订阅)</strong><br>用法：<br>1.发布  PubSub.publish(‘switchMusic’, type);<br>2.订阅 PubSub.subscribe(‘switchMusic’, (msg, data) =&gt; {<br>            console.log(data)<br>       })<br>PubSub.subscribe会触发多次（每订阅一次，数据就会累加，需求只需订阅一次时使用）<br>3.取消订阅 <code>PubSub.unsubscribe(&#39;switchMusic&#39;)</code> React【componentWillUnmount】</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">componentDidMount() &#123;</span><br><span class="line">	this.token = PubSub.subscribe(&#x27;data&#x27;, (msg, data) =&gt; &#123;</span><br><span class="line">		this.setState(&#123;</span><br><span class="line">			...data</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line">componentWillUnmount()&#123;</span><br><span class="line">	console.log(&#x27;卸载&#x27;,this.token);</span><br><span class="line">	PubSub.unsubscribe(this.token)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="React-ajax【第四章】"><a href="#React-ajax【第四章】" class="headerlink" title="React ajax【第四章】"></a>React ajax【第四章】</h1><ul>
+<li>xhr 和 fetch</li>
+<li>xhr 封装的库：axios实现异步加载</li>
+<li>fetch：fetch实现异步加载<h1 id="fetch发送请求-（关注分离的设计思想）"><a href="#fetch发送请求-（关注分离的设计思想）" class="headerlink" title="fetch发送请求 （关注分离的设计思想）"></a>fetch发送请求 （关注分离的设计思想）</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// try catch 获取await的错误情况</span><br><span class="line">try &#123;</span><br><span class="line">	let data = await fetch(`https://api.github.com/search/users?q=$&#123;keyWord&#125;`)</span><br><span class="line">	let response = await data.json()</span><br><span class="line">	PubSub.publish(&#x27;data&#x27;, &#123; isLoading: false, users: response.items &#125;);</span><br><span class="line">	console.log(response);</span><br><span class="line">&#125; catch (error) &#123;</span><br><span class="line">	console.log(error);</span><br><span class="line">	PubSub.publish(&#x27;data&#x27;, &#123;isLoading:false,err:error.message&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// axios实现异步加载</span><br><span class="line">axios.get(`https://api.github.com/search/users?q=$&#123;keyWord&#125;`).then(</span><br><span class="line">	response =&gt; &#123;</span><br><span class="line">		PubSub.publish(&#x27;data&#x27;, &#123;isLoading:false,users:response.data.items&#125;);</span><br><span class="line">	&#125;,</span><br><span class="line">	error =&gt; &#123;</span><br><span class="line">		PubSub.publish(&#x27;data&#x27;, &#123;isLoading:false,err:error.message&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure></li>
+</ul>
 
     </div>
 
@@ -379,7 +372,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://wuqisuda.github.io/2021/11/30/Typescript_01/" title="Ts知识点-基础类型">https://wuqisuda.github.io/2021/11/30/Typescript_01/</a>
+      <a href="https://wuqisuda.github.io/2021/12/30/03.React/" title="React知识点————React应用与ajax【第三章、第四章】">https://wuqisuda.github.io/2021/12/30/03.React/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -415,7 +408,7 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/Typescript/" rel="tag"><i class="fa fa-tag"></i>Typescript</a>
+              <a href="/tags/React/" rel="tag"><i class="fa fa-tag"></i>React</a>
           </div>
 
         
@@ -424,13 +417,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/11/21/javascript_a_3/" rel="prev" title="js知识点-异步编程">
-                  <i class="fa fa-chevron-left"></i> js知识点-异步编程
+                <a href="/2021/12/30/01.React/" rel="prev" title="React知识点————入门【第一章】">
+                  <i class="fa fa-chevron-left"></i> React知识点————入门【第一章】
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/11/30/Typescript_02/" rel="next" title="Ts知识点-接口">
-                  Ts知识点-接口 <i class="fa fa-chevron-right"></i>
+                <a href="/2021/12/30/02.React/" rel="next" title="React知识点————面向组件编程【第二章】">
+                  React知识点————面向组件编程【第二章】 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

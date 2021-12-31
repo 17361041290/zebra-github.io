@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" integrity="sha256-no0c5ccDODBwp+9hSmV5VvPpKwHCpbVzXHexIkupM6U=" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js" integrity="sha256-a5YRB27CcBwBFcT5EF/f3E4vzIqyHrSR878nseNYw64=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;wuqisuda.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Pisces&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;},&quot;path&quot;:&quot;&#x2F;search.xml&quot;,&quot;localsearch&quot;:{&quot;enable&quot;:true,&quot;trigger&quot;:&quot;auto&quot;,&quot;top_n_per_article&quot;:1,&quot;unescape&quot;:false,&quot;preload&quot;:true}}</script><script src="/js/config.js"></script>
+<meta name="description" content="描述：React的特点、认识React.js、使用js和jsx创建虚拟DOM、虚拟DOM的特点、jsx语法、模块与组件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React知识点————入门【第一章】">
+<meta property="og:url" content="https://wuqisuda.github.io/2021/12/30/01.React/index.html">
+<meta property="og:site_name" content="YM&#39;s Blog">
+<meta property="og:description" content="描述：React的特点、认识React.js、使用js和jsx创建虚拟DOM、虚拟DOM的特点、jsx语法、模块与组件">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-30T14:27:43.842Z">
+<meta property="article:modified_time" content="2021-12-30T14:59:05.567Z">
+<meta property="article:author" content="越明">
+<meta property="article:tag" content="React">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://wuqisuda.github.io/2021/12/30/01.React/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;wuqisuda.github.io&#x2F;2021&#x2F;12&#x2F;30&#x2F;01.React&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;12&#x2F;30&#x2F;01.React&#x2F;&quot;,&quot;title&quot;:&quot;React知识点————入门【第一章】&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>React知识点————入门【第一章】 | YM's Blog</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?d376738f73204c8c485cf1a22df75029"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+
+
+  
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+  
+ 
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">YM's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-guestbook"><a href="/guestbook/" rel="section"><i class="fa fa-comment fa-fw"></i>留言板</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React%EF%BC%9A%E6%98%AF%E4%B8%80%E4%B8%AA%E5%B0%86%E6%95%B0%E6%8D%AE%E6%B8%B2%E6%9F%93%E4%B8%BAHTML%E8%A7%86%E5%9B%BE%E7%9A%84%E5%BC%80%E6%BA%90JS%E5%BA%93"><span class="nav-number">1.</span> <span class="nav-text">React：是一个将数据渲染为HTML视图的开源JS库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js%E7%97%9B%E7%82%B9%EF%BC%9A%E5%8E%9F%E7%94%9Fjs%E6%93%8D%E4%BD%9CDOM%E7%B9%81%E7%90%90%EF%BC%8C%E6%95%88%E7%8E%87%E4%BD%8E%E3%80%90DOM-API-%E6%93%8D%E4%BD%9C-UI%E3%80%91-js%E6%93%8D%E4%BD%9CDOM-%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9B%E8%A1%8C%E5%A4%A7%E9%87%8F%E7%9A%84%E9%87%8D%E7%BB%98%E9%87%8D%E6%8E%92-js%E6%B2%A1%E6%9C%89%E7%BB%84%E4%BB%B6%E5%8C%96%E7%9A%84%E6%96%B9%E6%A1%88%EF%BC%8C%E4%BB%A3%E7%A0%81%E5%A4%8D%E7%94%A8%E7%8E%87%E4%BD%8E"><span class="nav-number">2.</span> <span class="nav-text">js痛点：原生js操作DOM繁琐，效率低【DOM-API 操作 UI】; js操作DOM,浏览器进行大量的重绘重排 ; js没有组件化的方案，代码复用率低</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">3.</span> <span class="nav-text">React的特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A4%E8%AF%86React-js"><span class="nav-number">4.</span> <span class="nav-text">认识React.js</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8js%E5%92%8Cjsx%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9FDOM"><span class="nav-number">5.</span> <span class="nav-text">使用js和jsx创建虚拟DOM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%99%9A%E6%8B%9FDOM%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-number">6.</span> <span class="nav-text">虚拟DOM的特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jsx%E8%AF%AD%E6%B3%95%EF%BC%9A"><span class="nav-number">7.</span> <span class="nav-text">jsx语法：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E4%B8%8E%E7%BB%84%E4%BB%B6"><span class="nav-number">8.</span> <span class="nav-text">模块与组件</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="越明"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">越明</p>
+  <div class="site-description" itemprop="description">不乱于心，不困于情，不畏将来，不念过往，如此，安好!</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wuqisuda" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wuqisuda" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2514860568@qq.com" title="E-Mail → mailto:2514860568@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.csdn.net/weixin_45901138?spm=1000.2115.3001.5343" title="https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_45901138?spm&#x3D;1000.2115.3001.5343" rel="noopener" target="_blank">CSDN</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="/blogs.chencong.fun" title="blogs.chencong.fun">阿东的博客</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://wuqisuda.github.io/2021/12/30/01.React/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="越明">
+      <meta itemprop="description" content="不乱于心，不困于情，不畏将来，不念过往，如此，安好!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YM's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          React知识点————入门【第一章】
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2021-12-30 22:27:43 / 修改时间：22:59:05" itemprop="dateCreated datePublished" datetime="2021-12-30T22:27:43+08:00">2021-12-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">描述：React的特点、认识React.js、使用js和jsx创建虚拟DOM、虚拟DOM的特点、jsx语法、模块与组件</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="React：是一个将数据渲染为HTML视图的开源JS库"><a href="#React：是一个将数据渲染为HTML视图的开源JS库" class="headerlink" title="React：是一个将数据渲染为HTML视图的开源JS库"></a>React：是一个将数据渲染为HTML视图的开源JS库</h1><h1 id="js痛点：原生js操作DOM繁琐，效率低【DOM-API-操作-UI】-js操作DOM-浏览器进行大量的重绘重排-js没有组件化的方案，代码复用率低"><a href="#js痛点：原生js操作DOM繁琐，效率低【DOM-API-操作-UI】-js操作DOM-浏览器进行大量的重绘重排-js没有组件化的方案，代码复用率低" class="headerlink" title="js痛点：原生js操作DOM繁琐，效率低【DOM-API 操作 UI】; js操作DOM,浏览器进行大量的重绘重排 ; js没有组件化的方案，代码复用率低"></a>js痛点：原生js操作DOM繁琐，效率低【DOM-API 操作 UI】; js操作DOM,浏览器进行大量的重绘重排 ; js没有组件化的方案，代码复用率低</h1><h1 id="React的特点"><a href="#React的特点" class="headerlink" title="React的特点"></a>React的特点</h1><ul>
+<li>采用组件化模式，声明式编程，提高开发效率和组件复用率</li>
+<li>React Native 可以进行移动端开发【安卓，ios】</li>
+<li>使用虚拟DOM + Diffing算法，减少与真实DOM的交互</li>
+</ul>
+<h1 id="认识React-js"><a href="#认识React-js" class="headerlink" title="认识React.js"></a>认识React.js</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;!-- react核心库 --&gt;</span><br><span class="line">    &lt;script src=&quot;./js/react.development.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;!-- 用于支持react操作dom --&gt;</span><br><span class="line">    &lt;script src=&quot;./js/react-dom.development.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;!-- babel用于将jsx转成js【babel也有ES6转ES5的功能】 --&gt;</span><br><span class="line">    &lt;script src=&quot;./js/babel.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;!-- type=&quot;text/babel&quot; 表示写的内容为jsx --&gt;</span><br><span class="line">    &lt;script type=&quot;text/babel&quot;&gt;</span><br><span class="line">        // 1.创建虚拟DOM  【不用加引号，他是虚拟DOM】</span><br><span class="line">        const VDOM = &lt;h2&gt;123456&lt;/h2&gt;</span><br><span class="line">        // 2.渲染虚拟DOM到页面</span><br><span class="line">        // ReactDOM.render(虚拟DOM,容器)</span><br><span class="line">        ReactDOM.render(VDOM, document.getElementById(&quot;app&quot;))</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="使用js和jsx创建虚拟DOM"><a href="#使用js和jsx创建虚拟DOM" class="headerlink" title="使用js和jsx创建虚拟DOM"></a>使用js和jsx创建虚拟DOM</h1><ul>
+<li>jsx:可以更加简洁编写虚拟DOM<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;使用js和jsx创建虚拟DOM&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;div id=&quot;text&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;script src=&quot;./js/react.development.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;./js/react-dom.development.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;./js/babel.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;!-- jsx创建虚拟DOM --&gt;</span><br><span class="line">    &lt;script type=&quot;text/babel&quot;&gt;</span><br><span class="line">        const VDOM = (</span><br><span class="line">            &lt;h1 id=&#x27;title&#x27;&gt;</span><br><span class="line">                &lt;span&gt;jsx:123456&lt;/span&gt;</span><br><span class="line">            &lt;/h1&gt;</span><br><span class="line">        )</span><br><span class="line">        ReactDOM.render(VDOM, document.getElementById(&quot;app&quot;))</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- js创建虚拟DOM --&gt;</span><br><span class="line">    &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">        // document.createElement(标签名，标签属性，标签内容)</span><br><span class="line">        const VDOM1 = React.createElement(&#x27;h1&#x27;, &#123;&#125;, React.createElement(&#x27;span&#x27;, &#123;&#125;, &#x27;js: 1234567&#x27;))</span><br><span class="line">        ReactDOM.render(VDOM1, document.getElementById(&quot;text&quot;))</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="虚拟DOM的特点"><a href="#虚拟DOM的特点" class="headerlink" title="虚拟DOM的特点"></a>虚拟DOM的特点</h1><ul>
+<li>本质是Object类型的对象</li>
+<li>虚拟DOM属性比真实DOM少很多，虚拟DOM在React内部使用，不需要那么多的属性</li>
+<li>虚拟DOM最终会被React转化为真实DOM,呈现在页面上</li>
+</ul>
+<h1 id="jsx语法："><a href="#jsx语法：" class="headerlink" title="jsx语法："></a>jsx语法：</h1><ul>
+<li>定义虚拟DOM,不要写引号</li>
+<li>标签混入JS表达式，要用花括号{} 【虚拟DOM里插入变量： {变量}】</li>
+<li>样式的类名指定要用className,不是class</li>
+<li>内联样式的写法<code>style=&#123;&#123;color:'pink',fontSize:'30px'&#125;&#125;</code></li>
+<li>根标签只能有一个</li>
+<li>标签必须闭合</li>
+<li>标签首字母<ul>
+<li>小写开头，转成html同名元素，若无则报错【例：<good> 】</li>
+<li>大写开头，React就会渲染对应的组件，组件没有定义，则报错<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;使用js和jsx创建虚拟DOM&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;div id=&quot;text&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;script src=&quot;./js/react.development.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;./js/react-dom.development.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;./js/babel.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script type=&quot;text/babel&quot;&gt;</span><br><span class="line">        const myId = &#x27;tiTlE&#x27;</span><br><span class="line">        const myData = &#x27;tiTlE_IteM&#x27;</span><br><span class="line">        // 虚拟DOM里插入变量： &#123;变量&#125;</span><br><span class="line">        // myId.toLowerCase() 字符串小写</span><br><span class="line">        const VDOM = (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;h1 className=&#x27;title&#x27; id=&#123;myId.toLowerCase()&#125;&gt;</span><br><span class="line">                    &lt;span style=&#123;&#123; color: &#x27;pink&#x27;, fontSize: &#x27;30px&#x27; &#125;&#125; id=&#123;myData.toLowerCase()&#125;&gt;jsx:123456&lt;/span&gt;</span><br><span class="line">                &lt;/h1&gt;</span><br><span class="line">                &lt;input type=&quot;text&quot; /&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">        ReactDOM.render(VDOM, document.getElementById(&quot;app&quot;))</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">    &lt;style&gt;</span><br><span class="line">        .title &#123;</span><br><span class="line">            background-color: royalblue;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/style&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>JS表达式:一个表达式会产生一个值，可以放在任何一个需要值的地方</strong><br><strong>例如</strong></p>
+<ul>
+<li>a</li>
+<li>a+b</li>
+<li>demo(1)</li>
+<li>arr.map()</li>
+<li>function test () { }</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>JS语句(代码)</strong><br><strong>例如</strong></p>
+<ul>
+<li>if(){}</li>
+<li>for(){}</li>
+<li>switch(){case:xxx}</li>
+</ul>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;script src=&quot;./js/react.development.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;./js/react-dom.development.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;./js/babel.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script type=&quot;text/babel&quot;&gt;</span><br><span class="line">        // 模拟数据</span><br><span class="line">        const data = [&#x27;A&#x27;,&#x27;Vue&#x27;,&#x27;React&#x27;]</span><br><span class="line">        const VDOM = (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;h2&gt;前端框架爱&lt;/h2&gt;</span><br><span class="line">                &lt;ul&gt;</span><br><span class="line">                    &#123;</span><br><span class="line">                        data.map((item,index) =&gt; &#123;return &lt;li key=&#123;index&#125;&gt;&#123;item&#125;&lt;/li&gt;&#125;)</span><br><span class="line">                    &#125;</span><br><span class="line">                    &lt;li&gt;Ang&lt;/li&gt;</span><br><span class="line">                    &lt;li&gt;Vue&lt;/li&gt;</span><br><span class="line">                    &lt;li&gt;React&lt;/li&gt;</span><br><span class="line">                &lt;/ul&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">        ReactDOM.render(VDOM, document.getElementById(&quot;app&quot;))</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h1 id="模块与组件"><a href="#模块与组件" class="headerlink" title="模块与组件"></a>模块与组件</h1><p>模块理解：向外提供特定功能的js程序,一个js文件就是模块<br>作用:复用js，简化js编写，提高js运行效率，降低耦合性</p>
+<p>组件理解：用来实现局部功能效果的代码和资源的集合<br>作用：复用编码，简化项目编程，提高运行效率</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>you can reward me here. Thank you!</div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechartpay.png" alt="越明 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.png" alt="越明 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>越明
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://wuqisuda.github.io/2021/12/30/01.React/" title="React知识点————入门【第一章】">https://wuqisuda.github.io/2021/12/30/01.React/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechart.png">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/React/" rel="tag"><i class="fa fa-tag"></i>React</a>
+          </div>
+
+        
+
+
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/12/14/vue3_a_5/" rel="prev" title="vue3 其它新组合和API">
+                  <i class="fa fa-chevron-left"></i> vue3 其它新组合和API
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/12/30/03.React/" rel="next" title="React知识点————React应用与ajax【第三章、第四章】">
+                  React知识点————React应用与ajax【第三章、第四章】 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">越明</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">141k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:08</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  <script class="next-config" data-name="nprogress" type="application/json">{&quot;enable&quot;:true,&quot;spinner&quot;:true}</script>
+  <script src="/js/third-party/nprogress.js"></script>
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
